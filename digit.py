@@ -1,3 +1,5 @@
+import time
+
 print("""
 
 HOŞGELDİNİZ
@@ -23,7 +25,7 @@ averageprice = (amb3 / totalkg)
 averagepricestr = str(averageprice).split(".")[1]
 
 
-price1strdotdigit = str(price1).split(".")[1] # Virgülden sonraki dijit
+'''price1strdotdigit = str(price1).split(".")[1] # Virgülden sonraki dijit
 price1strdigit = int(price1strdotdigit[0]) # Virgülden sonraki ilk dijit
 price1strnumber = int(str(price1).split(".")[0]) # Virgülden önceki sayı
 price1strdigit = (price1strdigit * 1/10)
@@ -33,7 +35,7 @@ price2strdotdigit = str(price2).split(".")[1] # Virgülden sonraki dijit
 price2strdigit = int(price2strdotdigit[0]) # Virgülden sonraki ilk dijit
 price2strnumber = int(str(price2).split(".")[0]) # Virgülden önceki sayı
 price2strdigit = (price2strdigit * 1/10)
-newprice2 = price2strnumber + price2strdigit
+newprice2 = price2strnumber + price2strdigit'''
 
 liste = []
 sayac = 0
@@ -46,14 +48,14 @@ for i in range(999):
 
 for i in range(999):
     newa = float(liste[i])
-    ambcontrol = str(((newprice + newa) * kg1)).split(".")[1] # Birinci Kontrol Kodu
+    ambcontrol = str(((price1 + newa) * kg1)).split(".")[1] # Birinci Kontrol Kodu
     if len(ambcontrol) == 3 or len(ambcontrol) == 2 or len(ambcontrol) == 1:# Ambalaj Virgülden sonraki hane sayısı kontro
-        tryint = (((newprice + newa) * kg1) + (price2 * kg2)) / totalkg
+        tryint = (((price1 + newa) * kg1) + (price2 * kg2)) / totalkg
         #print(tryint)
         #print(newprice + newa)
         tryintstr = str(tryint).split(".")[1]
-        if len(tryintstr) == 3 or len(tryintstr) == 2 or len(tryintstr) == 1 and len(str((newprice + newa)).split(".")[1]) <= 3:# Ortalama Fiyat Virgülden sonraki hane sayısı kontrolü
-            print("Yeni Fiyat => {}".format((newprice + newa)))
+        if (len(tryintstr) == 3 or len(tryintstr) == 2 or len(tryintstr) == 1) and (len(str((price1 + newa)).split(".")[1]) <= 3):# Ortalama Fiyat Virgülden sonraki hane sayısı kontrolü
+            print("Yeni Fiyat => {}".format((price1 + newa)))
 
             print("""
 
@@ -72,24 +74,27 @@ for i in range(999):
 
             ****Not: Eğer Yeni Fiyat adında bir değişken yoksa tablodaki verileri görmezden geliniz****
 
-            """.format((newprice + newa),price2,totalkg,tryint))
+            """.format((price1 + newa),price2,totalkg,tryint))
+            time.sleep(20)
             exit()
         else:
             pass
+    else:
+        pass
 
-secim = input("2.yi denemek tutmak ister misiniz:(y/n) ")
+secim = input("2.yi denemek ister misiniz:(y/n) ")
 
 if secim == "y":
     for i in range(999):
         newa = float(liste[i])
-        ambcontrol = str(((newprice2 + newa) * kg2)).split(".")[1] # İkinci Kontrol Kodu
+        ambcontrol = str(((price2 + newa) * kg2)).split(".")[1] # İkinci Kontrol Kodu
         if len(ambcontrol) == 3 or len(ambcontrol) == 2 or len(ambcontrol) == 1: # Ambalaj Virgülden sonraki hane sayısı kontrolü
-            tryint = ((price1 * kg1) + ((newprice2 + newa) * kg2)) / totalkg
+            tryint = ((price1 * kg1) + ((price2 + newa) * kg2)) / totalkg
             #print(tryint)
             #print(newprice2 + newa)
             tryintstr = str(tryint).split(".")[1]
-            if len(tryintstr) == 3 or len(tryintstr) == 2 or len(tryintstr) == 1: # Ortalama Fiyat Virgülden sonraki hane sayısı kontrolü
-                print("Yeni Fiyat => {}".format((newprice2 + newa)))
+            if (len(tryintstr) == 3 or len(tryintstr) == 2 or len(tryintstr) == 1) and (len(str((price2 + newa)).split(".")[1]) <= 3): # Ortalama Fiyat Virgülden sonraki hane sayısı kontrolü
+                print("Yeni Fiyat => {}".format((price2 + newa)))
 
                 print("""
 
@@ -108,8 +113,9 @@ if secim == "y":
 
                 ****Not: Eğer Yeni Fiyat adında bir değişken yoksa tablodaki verileri görmezden geliniz****
 
-                """.format(price1,(newprice2 + newa),totalkg,tryint))
-                break
+                """.format(price1,(price2 + newa),totalkg,tryint))
+                time.sleep(20)
+                exit()
             else:
                 pass
 
